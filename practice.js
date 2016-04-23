@@ -1,7 +1,7 @@
-var groceryItems = ['oranges', 'grapes'];
+var groceryItems = ['apples', 'oranges','bananas'];
 
 class GroceryListItem extends React.Component {
-  constructor(props) {
+  constructor(props){
     super(props);
 
     this.state = {
@@ -16,34 +16,35 @@ class GroceryListItem extends React.Component {
     });
   }
 
-  onMouseEnter() {
+  onMouseEnter () {
     this.setState({
       hovering: true
     });
   }
 
-  onMouseLeave() {
+  onMouseLeave () {
     this.setState({
       hovering: false
     });
   }
 
-  render() {
+  render () {
     var style = {
-      fontWeight: this.state.hovering ? 'bold' : 'normal'
-    };
+      'fontWeight': this.state.hovering ? 'bold' : 'normal',
+      'textDecoration': this.state.clicked ? 'line-through' : 'none'
+  };
 
-    return( 
-      <li 
-        style={style} 
-        onMouseLeave={this.onMouseLeave.bind(this)}
+    return (
+      <li
+        style={style}
         onMouseEnter={this.onMouseEnter.bind(this)}
+        onMouseLeave={this.onMouseLeave.bind(this)}
         onClick={this.onClick.bind(this)}>
         {this.props.items}
       </li>
-    )
+      )
   }
-};
+}
 
 
 var GroceryList = () => (
@@ -54,5 +55,12 @@ var GroceryList = () => (
   </ul>
 );
 
-ReactDOM.render(<GroceryList />, document.getElementById("app"));
 
+var App = () => (
+  <div>
+    <h3>GroceryList</h3>
+    <GroceryList />
+  </div>
+  )
+
+ReactDOM.render(<App />, document.getElementById('app'));
